@@ -18,57 +18,64 @@ class CategoriesSeeder extends Seeder
         DB::table('categories')->truncate();
         Categories::create([
             'parent_id' => 0,
-            'name' => 'TRANG CHỦ',
+            'name' => 'Trang Chủ',
             'slug' => 'trang-chu',
-            'has_child' => 0
         ]);
         Categories::create([
             'parent_id' => 0,
-            'name' => 'SẢN PHẨM',
-            'slug' => 'san-pham',
-            'has_child' => 1
+            'name' => 'Giới thiệu',
+            'slug' => 'gioi-thieu',
         ]);
         Categories::create([
             'parent_id' => 0,
-            'name' => 'HỆ THỐNG VN VHOME',
-            'slug' => 'he-thong-vn-vhome',
-            'has_child' => 0
+            'name' => 'Lao động nhật bản',
+            'slug' => 'lao-dong-nhat-ban',
+        ]);
+        Categories::create([
+            'parent_id' => 3,
+            'name' => 'Thực tập sinh',
+            'slug' => 'thuc-tap-sinh',
+        ]);
+        Categories::create([
+            'parent_id' => 3,
+            'name' => 'Kỹ thuật viên',
+            'slug' => 'ky-thuat-vien',
+        ]);
+        Categories::create([
+            'parent_id' => 3,
+            'name' => 'Thông tin đơn hàng',
+            'slug' => 'thong-tin-don-hang',
         ]);
         Categories::create([
             'parent_id' => 0,
-            'name' => 'PHẢN HỒI KHÁCH HÀNG',
-            'slug' => 'phan-hoi-khach-hang',
-            'has_child' => 0
+            'name' => 'Hoạt động',
+            'slug' => 'hoat-dong',
         ]);
         Categories::create([
-            'parent_id' => 0,
-            'name' => 'TIN TỨC',
-            'slug' => 'tin-tuc',
-            'has_child' => 1
-        ]);
-        Categories::create([
-            'parent_id' => 5,
-            'name' => 'Hoạt động của VN VHome',
-            'slug' => 'hoat-dong-cua-vn-vhome',
-            'has_child' => 0
-        ]);
-        Categories::create([
-            'parent_id' => 5,
-            'name' => 'Ưu đãi, chính sách',
-            'slug' => 'uu-dai-chinh-sach',
-            'has_child' => 0
-        ]);
-        Categories::create([
-            'parent_id' => 5,
+            'parent_id' => 7,
             'name' => 'Kinh nghiệm nội thất',
             'slug' => 'kinh-nghiem-noi-that',
-            'has_child' => 0
         ]);
         Categories::create([
-            'parent_id' => 5,
+            'parent_id' => 7,
             'name' => 'Tin tức khác',
             'slug' => 'tin-tin-khac',
-            'has_child' => 0
+        ]);
+        Categories::create([
+            'parent_id' => 0,
+            'name' => 'Góc Nhật bản',
+            'slug' => 'goc-nhat-ban',
+        ]);
+        Categories::create([
+            'parent_id' => 0,
+            'name' => 'Liên hệ',
+            'slug' => 'lien-he',
+        ]);
+
+        Categories::create([
+            'parent_id' => 10,
+            'name' => 'Đăng ký tư vấn',
+            'slug' => 'dang-ky-tu-van',
         ]);
     }
 }

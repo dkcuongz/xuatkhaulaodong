@@ -18,7 +18,6 @@ class CreateCategoriesTable extends Migration
             $table->integer('parent_id')->unsigned()->default(0);
             $table->string('name');
             $table->string('slug');
-            $table->string('has_child')->default(0);
             $table->timestamps();
         });
     }
