@@ -48,18 +48,18 @@ class CategoriesSeeder extends Seeder
         ]);
         Categories::create([
             'parent_id' => 0,
-            'name' => 'Hoạt động',
-            'slug' => 'hoat-dong',
+            'name' => 'Hoạt động PTM',
+            'slug' => 'hoat-dong-ptm',
         ]);
         Categories::create([
             'parent_id' => 7,
-            'name' => 'Kinh nghiệm nội thất',
-            'slug' => 'kinh-nghiem-noi-that',
+            'name' => 'PTMTV',
+            'slug' => 'ptmtv',
         ]);
         Categories::create([
             'parent_id' => 7,
-            'name' => 'Tin tức khác',
-            'slug' => 'tin-tin-khac',
+            'name' => 'Tin tức PTM',
+            'slug' => 'tin-tức-ptm',
         ]);
         Categories::create([
             'parent_id' => 0,

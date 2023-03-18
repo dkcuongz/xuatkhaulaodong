@@ -32,7 +32,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = $this->repository->where('parent_id', '=', 2)->get();
+        $categories = $this->repository->where('parent_id', '=', 3)->get();
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -41,7 +41,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        $categories = $this->repository->where('id', '=', 2)->with(['allLevelChildren'])->get();
+        $categories = $this->repository->where('id', '=', 3)->with(['allLevelChildren'])->get();
         return view('admin.categories.create', compact('categories'));
     }
 

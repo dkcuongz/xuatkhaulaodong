@@ -55,32 +55,32 @@ Route::group([
     Route::get('/trang-chu', [HomeController::class, 'index'])
         ->name('trang-chu');
 
-    Route::get('/san-pham', [FrontPostsController::class, 'index'])
-        ->name('san-pham');
+    Route::get('/gioi-thieu', [FrontPostsController::class, 'index'])
+        ->name('gioi-thieu');
 
-    Route::get('/san-pham/{slug}', [FrontPostsController::class, 'byCategory'])
-        ->name('san-pham.child');
+    Route::get('/lao-dong-nhat-ban', [FrontPostsController::class, 'byCategory'])
+        ->name('lao-dong-nhat-ban');
 
-    Route::get('/san-pham/{slug}/{id}', [FrontPostsController::class, 'show'])
-        ->name('san-pham.detail');
+    Route::get('/thuc-tap-sinh', [FrontPostsController::class, 'show'])
+        ->name('thuc-tap-sinh');
 
-    Route::get('/he-thong-vn-vhome', [FrontSystemsController::class, 'index'])
-        ->name('he-thong-vn-vhome');
+    Route::get('/thong-tin-don-hang', [FrontSystemsController::class, 'index'])
+        ->name('thong-tin-don-hang');
 
-    Route::get('/he-thong-vn-vhome/{id}', [FrontSystemsController::class, 'show'])
-        ->name('he-thong-vn-vhome.detail');
+    Route::get('/hoat-dong-ptm', [FrontSystemsController::class, 'show'])
+        ->name('hoat-dong-ptm');
 
-    Route::get('/phan-hoi-khach-hang', [CustomerCareController::class, 'index'])
-        ->name('phan-hoi-khach-hang');
+    Route::get('/ptmtv', [CustomerCareController::class, 'index'])
+        ->name('ptmtv');
 
-    Route::get('/tin-tuc', [BlogController::class, 'index'])
-        ->name('tin-tuc');
+    Route::get('/tin-tuc-ptm', [BlogController::class, 'index'])
+        ->name('tin-tuc-ptm');
 
-    Route::get('/tin-tuc/{slug}', [BlogController::class, 'byCategory'])
-        ->name('tin-tuc.child');
+    Route::get('/goc-nhat-ban', [BlogController::class, 'byCategory'])
+        ->name('goc-nhat-ban');
 
-    Route::get('/tin-tuc/{slug}/{id}', [BlogController::class, 'show'])
-        ->name('tin-tuc-blog.detail');
+    Route::get('/lien-he', [BlogController::class, 'show'])
+        ->name('lien-he');
 
     Route::get('/dang-ky-tu-van', [FrontContactController::class, 'index'])
         ->name('dang-ky-tu-van');
@@ -104,7 +104,7 @@ Route::group([
     Route::resource('systems', SystemsController::class);
     Route::resource('posts', PostsController::class);
     Route::resource('banners', BannerController::class);
-    Route::resource('introduce-peoples', \App\Http\Controllers\Admin\IntroducePeoplesController::class);
+    Route::resource('introduces', \App\Http\Controllers\Admin\IntroduceController::class);
     Route::resource('news', NewsController::class);
     Route::resource('contacts', ContactsController::class);
 });

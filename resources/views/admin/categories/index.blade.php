@@ -34,7 +34,7 @@
                                 <td>{{$category->slug}}</td>
                                 <td>{{$category->parent->name ?? ''}}</td>
                                 <td class="text-center">
-                                    @if(!$category->has_child)
+                                    @if($category->parent_id)
                                         <a href="{{route('admin.categories.edit', $category)}}"
                                            class="btn btn-primary btn-xs">
                                             Sửa

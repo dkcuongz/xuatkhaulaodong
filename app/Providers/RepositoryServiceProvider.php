@@ -30,7 +30,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\App\Repositories\ImageRepository::class, \App\Repositories\ImageRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\BannerRepository::class, \App\Repositories\BannerRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\NewsRepository::class, \App\Repositories\NewsRepositoryEloquent::class);
-        $this->app->bind(\App\Repositories\IntroducePeopleRepository::class, \App\Repositories\IntroducePeopleRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\IntroduceRepository::class, \App\Repositories\IntroduceRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\SystemRepository::class, \App\Repositories\SystemRepositoryEloquent::class);
         //:end-bindings:
     }

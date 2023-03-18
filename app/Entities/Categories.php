@@ -29,7 +29,7 @@ class Categories extends Model implements Transformable
 
     public function allLevelChildren()
     {
-        return $this->hasMany(Categories::class, 'parent_id')->where('has_child', 1);
+        return $this->hasMany(Categories::class, 'parent_id')->where('parent_id', 0);
     }
 
     public function allLevelChildrenWithSubChild()

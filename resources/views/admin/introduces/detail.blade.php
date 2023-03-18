@@ -12,34 +12,36 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="form-group">
-                            @foreach ($categories as $subcategory)
-                                @if($subcategory->id == $post->category_id)
-                                    <lable>{{ $subcategory->name}}</lable>
-                                @endif
-                            @endforeach
-                        </div>
+
                         <div class="form-group">
                             <label for="exampleInputName">Tiêu đề</label>
-                            <p>{{ $post->title}}</p>
+                            <p>{{ $introduce->title}}</p>
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputEmail">Nội dung</label>
-                            <div>{!!$post->description!!}</div>
+                            <div>{!!$introduce->description!!}</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail">Ảnh thumnail</label>
+                            <div class="col-md-12 mb-2">
+                                <img id="preview-image-before-upload"
+                                     src="{{asset($introduce->image->path ?? 'images-UI/notfound.jpg')}}"
+                                     alt="preview image" style="max-height: 250px;">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="status">Trạng thái</label>
                             <div class="form-check">
                                 <label class="form-check-label" for="flexRadioDefault1">
-                                    {{ $post->status == '1' ? 'Hoạt động' : 'Ẩn' }}
+                                    {{ $introduce->status == '1' ? 'Hoạt động' : 'Ẩn' }}
                                 </label>
                             </div>
                         </div>
                     </div>
 
                     <div class="card-footer">
-                        <a href="{{route('admin.introduce.index')}}" class="btn btn-default">
+                        <a href="{{route('admin.introduces.index')}}" class="btn btn-default">
                             Danh sách bài viết giới thiệu
                         </a>
                     </div>

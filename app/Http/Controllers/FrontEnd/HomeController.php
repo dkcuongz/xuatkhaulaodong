@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\FrontEnd;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\IntroducePeopleRepository;
+use App\Repositories\IntroduceRepository;
 use App\Repositories\PostRepository;
 use App\Repositories\SystemRepository;
 use Illuminate\Http\Request;
@@ -27,7 +27,7 @@ class HomeController extends Controller
      * @param PostRepository $postRepository
      * @param SystemRepository $systemRepository
      */
-    public function __construct(PostRepository $postRepository, SystemRepository $systemRepository, IntroducePeopleRepository $peopleRepository)
+    public function __construct(PostRepository $postRepository, SystemRepository $systemRepository, IntroduceRepository $peopleRepository)
     {
         $this->postRepository = $postRepository;
         $this->systemRepository = $systemRepository;
