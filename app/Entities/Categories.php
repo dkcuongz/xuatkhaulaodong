@@ -22,6 +22,11 @@ class Categories extends Model implements Transformable
         return $this->hasMany(Categories::class, 'parent_id');
     }
 
+    public function scopeHasPost()
+    {
+        return $this->where('has_post', 1);
+    }
+
     public function parent()
     {
         return $this->belongsTo(Categories::class);

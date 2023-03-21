@@ -235,36 +235,36 @@ return [
             'url' => '/admin/banners',
             'icon' => 'fa fa-file',
         ],
+//        [
+//            'text' => 'Giới thiệu',
+//            'url' => '/admin/introduces',
+//            'icon' => 'fa fa-comment',
+//        ],
+//        [
+//            'text' => 'Hệ thống',
+//            'url' => '/admin/systems',
+//            'icon' => 'fa fa-clipboard',
+//        ],
         [
-            'text' => 'Giới thiệu',
-            'url' => '/admin/introduces',
-            'icon' => 'fa fa-comment',
-        ],
-        [
-            'text' => 'Hệ thống',
-            'url' => '/admin/systems',
-            'icon' => 'fa fa-clipboard',
-        ],
-        [
-            'text' => 'Bài viết thiết kế',
+            'text' => 'Bài viết',
             'url' => '/admin/posts',
             'icon' => 'fa fa-clipboard',
         ],
-        [
-            'text' => 'Bài viết tin tức',
-            'url' => '/admin/news',
-            'icon' => 'fa fa-comment',
-        ],
+//        [
+//            'text' => 'Bài viết tin tức',
+//            'url' => '/admin/news',
+//            'icon' => 'fa fa-comment',
+//        ],
         [
             'text' => 'Liên hệ',
             'url' => '/admin/contacts',
             'icon' => 'fa fa-phone',
         ],
-        [
-            'text' => 'Người dùng',
-            'url' => '/admin/users',
-            'icon' => 'fa fa-users',
-        ],
+//        [
+//            'text' => 'Người dùng',
+//            'url' => '/admin/users',
+//            'icon' => 'fa fa-users',
+//        ],
     ],
 
     /*

@@ -17,21 +17,14 @@ class HomeController extends Controller
      */
     protected $postRepository;
 
-    protected $systemRepository;
-
-    protected $peopleRepository;
-
     /**
      * categoriesController constructor.
      *
      * @param PostRepository $postRepository
-     * @param SystemRepository $systemRepository
      */
-    public function __construct(PostRepository $postRepository, SystemRepository $systemRepository, IntroduceRepository $peopleRepository)
+    public function __construct(PostRepository $postRepository)
     {
         $this->postRepository = $postRepository;
-        $this->systemRepository = $systemRepository;
-        $this->peopleRepository = $peopleRepository;
     }
 
     /**
@@ -41,9 +34,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = $this->postRepository->with('images')->orderBy('created_at', 'DESC')->take(15)->get();
-        $systems = $this->systemRepository->with('images')->orderBy('created_at', 'DESC')->take(15)->get();
-        $peoples = $this->peopleRepository->with('image')->orderBy('created_at', 'DESC')->take(15)->get();
+        $posts = $this->postRepository->with('image')->orderBy('created_at', 'DESC')->take(15)->get();
         return view('front-end.home.index', compact('posts', 'systems', 'peoples'));
     }
 }

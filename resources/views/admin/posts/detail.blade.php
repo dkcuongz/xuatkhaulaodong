@@ -13,6 +13,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-group">
+                            <label for="exampleInputName">Danh mục</label>
+                            <br>
                             @foreach ($categories as $subcategory)
                                 @if($subcategory->id == $post->category_id)
                                     <lable>{{ $subcategory->name}}</lable>
@@ -26,11 +28,7 @@
                         <div class="form-group">
                             <label for="status">Ảnh</label>
                             <div class="row">
-                                @foreach($post->images as $img)
-                                    <div class="col-3">
-                                        <img class="img-max-div" src="{{asset($img->path)}}" alt="">
-                                    </div>
-                                @endforeach
+                                <img class="img-max-div" src="{{asset($post->image->path)}}" alt="">
                             </div>
                         </div>
                         <div class="form-group">
@@ -49,7 +47,7 @@
 
                     <div class="card-footer">
                         <a href="{{route('admin.posts.index')}}" class="btn btn-default">
-                            Danh sách bài viết thiết kế
+                            Danh sách bài viết
                         </a>
                     </div>
                 </div>

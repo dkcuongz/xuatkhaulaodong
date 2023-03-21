@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Danh sách bài viết thiết kế')
+@section('title', 'Danh sách bài')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Danh sách bài viết thiết kế</h1>
+    <h1 class="m-0 text-dark">Danh sách bài viết</h1>
 @stop
 
 @section('content')
@@ -14,7 +14,16 @@
                     <a href="{{route('admin.posts.create')}}" class="btn btn-primary mb-2">
                         Tạo mới
                     </a>
-                    <table class="table table-hover table-bordered table-stripped" id="example2">
+                    <div class="form-group">
+                        <label><strong>Danh mục :</strong></label>
+                        <select id='category' name="category_id" id="" class="form-control">
+                        @foreach ($categories as $subcategory)
+                            <!-- Include categories.blade.php file and pass the current category to it -->
+                                @include('admin.categories.categories', ['parent_id'=>0,'category' => $subcategory, $level=''])
+                            @endforeach
+                        </select>
+                    </div>
+                    <table class="table table-hover table-bordered table-stripped data-table" id="index-post">
                         <thead>
                         <tr>
                             <th>Số TT</th>
@@ -31,7 +40,7 @@
                                 <td>{{$post->title}}</td>
                                 <td>
                                     <div class="summary-content"><img
-                                            src="{{asset($post->images->first()->path ?? 'images-UI/notfound.jpg')}}" alt="">
+                                            src="{{asset($post->image->path ?? 'images-UI/notfound.jpg')}}" alt="">
                                     </div>
                                 </td>
                                 <th><p class="font-weight-normal">{{$post->status ? 'Hiển thị' :'Ẩn' }}</p></th>
@@ -64,10 +73,6 @@
         @csrf
     </form>
     <script>
-        $('#example2').DataTable({
-            "responsive": true,
-        });
-
         function notificationBeforeDelete(event, el) {
             event.preventDefault();
             if (confirm('Bạn có muốn xóa bài viết này không ?')) {

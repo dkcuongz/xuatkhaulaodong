@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Entities\Post;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostCreateRequest;
 use App\Http\Requests\PostUpdateRequest;
@@ -9,7 +10,9 @@ use App\Repositories\CategoriesRepository;
 use App\Repositories\ImageRepository;
 use App\Repositories\PostRepository;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\Facades\DataTables;
 
 class PostsController extends Controller
 {
@@ -34,6 +37,8 @@ class PostsController extends Controller
      * postsController constructor.
      *
      * @param PostRepository $repository
+     * @param ImageRepository $imageRepository
+     * @param CategoriesRepository $categoryRepository
      */
     public function __construct(PostRepository $repository, ImageRepository $imageRepository, CategoriesRepository $categoryRepository)
     {
@@ -45,22 +50,21 @@ class PostsController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = $this->repository->with('images')->whereHas('category', function ($query) {
-            $query->whereHas('parent', function ($subQuery) {
-                $subQuery->where(['id' => 2]);
-            });
-        })->get();
-        return view('admin.posts.index', compact('posts'));
+        $categories = $this->categoryRepository->whereDoesntHave('children')->hasPost()->get();
+        $posts = $this->repository->with('image')->all();
+        return view('admin.posts.index', compact('posts', 'categories'));
     }
 
 
     public function create()
     {
-        $categories = $this->categoryRepository->with(['allLevelChildren'])->where('parent_id', '=', 2)->get();
+        $categories = $this->categoryRepository->whereDoesntHave('children')->hasPost()->get();
         return view('admin.posts.create', compact('categories'));
     }
 
@@ -77,19 +81,15 @@ class PostsController extends Controller
         DB::beginTransaction();
         try {
             $data = $request->all();
-            $data['type'] = config('constants.post.type.post');
             $post = $this->repository->create($data);
-            $images = $request->file('images');
-            $dataImage = [];
-            if ($request->hasfile('images')) {
-                foreach ($images as $image) {
-                    $filename = $image->hashName();
-                    Storage::put('images/posts', $image, 'public');
-                    $newImage['path'] = 'images/posts/' . $filename;
-                    $newImage['post_id'] = $post->id;
-                    array_push($dataImage, $newImage);
-                }
-                $this->imageRepository->insert($dataImage);
+            if ($request->file('image')) {
+                $file = $request->file('image');
+                $filename = $file->hashName();
+                Storage::put('images', $file, 'public');
+                $dataImage['path'] = 'images/' . $filename;
+                $dataImage['post_id'] = $post->id;
+                $this->imageRepository->create($dataImage);
+
             }
             $response = [
                 'message' => 'Tạo mới bài viết thành công.',
@@ -112,7 +112,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $categories = $this->categoryRepository->with(['allLevelChildren'])->where('parent_id', '=', 3)->get();
+        $categories = $this->categoryRepository->whereDoesntHave('children')->hasPost()->get();
         $post = $this->repository->with('image')->find($id);
         return view('admin.posts.detail', compact('post', 'categories'));
     }
@@ -126,8 +126,8 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        $categories = $this->categoryRepository->with(['allLevelChildren'])->where('parent_id', '=', 2)->get();
-        $post = $this->repository->with('images')->find($id);
+        $categories = $this->categoryRepository->whereDoesntHave('children')->hasPost()->get();
+        $post = $this->repository->with('image')->find($id);
         return view('admin.posts.edit', compact('post', 'categories'));
     }
 
@@ -145,25 +145,14 @@ class PostsController extends Controller
         try {
             $data = $request->all();
             $post = $this->repository->update($data, $id);
-            $images = $request->file('images');
-            if (count($data['images_uploaded']) > 0) {
-                $pathsRemove = array_diff($data['images_uploaded_origin'], $data['images_uploaded']);
-            } else {
-                $pathsRemove = $data['images_uploaded_origin'];
-            }
-            if (count($pathsRemove) > 0) {
-                $this->imageRepository->deleteWhereIn('path', $pathsRemove);
-            }
-            $dataImage = [];
-            if ($request->hasfile('images')) {
-                foreach ($images as $image) {
-                    $filename = $image->hashName();
-                    Storage::put('images/posts', $image, 'public');
-                    $newImage['path'] = 'images/posts/' . $filename;
-                    $newImage['post_id'] = $post->id;
-                    array_push($dataImage, $newImage);
-                }
-                $this->imageRepository->insert($dataImage);
+            if ($request->file('image')) {
+                $file = $request->file('image');
+                $filename = $file->hashName();
+                Storage::put('images', $file, 'public');
+                $dataImage['path'] = 'images/' . $filename;
+                $dataImage['post_id'] = $post->id;
+                $this->imageRepository->where('post_id', $post->id)->delete();
+                $this->imageRepository->create($dataImage);
             }
             $response = [
                 'message' => 'Cập nhật bài viết thành công',
@@ -188,7 +177,7 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $post = $this->repository->find($id);
-        $post->images()->delete();
+        $post->image()->delete();
         $post->delete();
         return redirect()->back()->with('success_message', 'Xóa bài viết thành công');
     }

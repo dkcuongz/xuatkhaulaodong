@@ -28,19 +28,13 @@
                                    id="exampleInputName" placeholder="Tiêu đề" name="title" value="{{old('title')}}">
                             @error('title') <span class="text-danger">{{$message}}</span> @enderror
                         </div>
-                        <label for="exampleInputName">Ảnh</label>
-                        <div class="input-group hdtuto control-group lst increment">
-                            <div class="list-input-hidden-upload">
-                                <input hidden type="file" name="images[]" id="file_upload"
-                                       class="myfrm form-control hidden">
-                            </div>
-                            <div class="input-group-btn">
-                                <button class="btn btn-success btn-add-image" type="button"><i
-                                        class="fldemo glyphicon glyphicon-plus"></i>+Add image
-                                </button>
-                            </div>
-                        </div>
-                        <div class="list-images">
+                        <div class="form-group">
+                            <label for="exampleInputName">Ảnh thumbnail</label>
+                            <br>
+                            <input type="file" name="image" placeholder="Chọn ảnh" id="image">
+                            @error('image')
+                            <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-md-12 mb-2" id="none-image">
                             <img id="preview-image-before-upload"
@@ -70,7 +64,7 @@
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Tạo mới</button>
                         <a href="{{route('admin.posts.index')}}" class="btn btn-default">
-                            Danh sách bài viết thiết kế
+                            Danh sách bài viết
                         </a>
                     </div>
                 </div>
@@ -90,56 +84,24 @@
     @include('ckfinder::setup')
     @push('js')
         <script type="text/javascript">
-            $(document).ready(function () {
-                $(".btn-add-image").click(function () {
-                    let countImage = $("input[name='images[]']").map(function () {
-                        if ($(this).val() !== '')
-                            return $(this).val();
-                    })
-                    if (countImage.length > 9) {
-                        alert('Không được up quá 10 ảnh!')
-                    } else $('#file_upload').trigger('click');
 
-                });
+            $(document).ready(function (e) {
 
-                $('.list-input-hidden-upload').on('change', '#file_upload', function (event) {
-                    let today = new Date();
-                    let time = today.getTime();
-                    let image = event.target.files[0];
-                    let file_name = event.target.files[0].name;
-                    let box_image = $('<div class="box-image"></div>');
-                    box_image.append('<img src="' + URL.createObjectURL(image) + '" class="picture-box">');
-                    box_image.append('<div class="wrap-btn-delete"><span data-id=' + time + ' class="btn-delete-image">x</span></div>');
-                    $(".list-images").append(box_image);
 
-                    $(this).removeAttr('id');
-                    $(this).attr('id', time);
-                    let input_type_file = '<input type="file" hidden name="images[]" id="file_upload" class="myfrm form-control hidden">';
-                    $('.list-input-hidden-upload').append(input_type_file);
-                    let countImage = $("input[name='images[]']").map(function () {
-                        if ($(this).val() !== '')
-                            return $(this).val();
-                    })
-                    if (countImage.length > 0) {
-                        $("#none-image").addClass("d-none");
+                $('#image').change(function () {
+
+                    let reader = new FileReader();
+
+                    reader.onload = (e) => {
+
+                        $('#preview-image-before-upload').attr('src', e.target.result);
                     }
 
+                    reader.readAsDataURL(this.files[0]);
+
                 });
 
-                $(".list-images").on('click', '.btn-delete-image', function () {
-                    let id = $(this).data('id');
-                    $('#' + id).remove();
-                    $(this).parents('.box-image').remove();
-                    let countImage = $("input[name='images[]']").map(function () {
-                        if ($(this).val() !== '')
-                            return $(this).val();
-                    })
-                    if (countImage.length == 0) {
-                        $("#none-image").removeClass("d-none");
-                    }
-                });
             });
-        </script>
 
         </script>
     @endpush

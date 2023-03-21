@@ -101,11 +101,11 @@ Route::group([
         ->name('home');
     Route::resource('users', UsersController::class);
     Route::resource('categories', CategoriesController::class);
-    Route::resource('systems', SystemsController::class);
+//    Route::resource('systems', SystemsController::class);
     Route::resource('posts', PostsController::class);
     Route::resource('banners', BannerController::class);
-    Route::resource('introduces', \App\Http\Controllers\Admin\IntroduceController::class);
-    Route::resource('news', NewsController::class);
+//    Route::resource('introduces', \App\Http\Controllers\Admin\IntroduceController::class);
+//    Route::resource('news', NewsController::class);
     Route::resource('contacts', ContactsController::class);
 });
 

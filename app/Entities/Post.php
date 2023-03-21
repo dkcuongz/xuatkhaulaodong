@@ -19,9 +19,9 @@ class Post extends Model implements Transformable
         'category_id'
     ];
 
-    public function images()
+    public function image()
     {
-        return $this->hasMany(Image::class, 'post_id');
+        return $this->hasOne(Image::class, 'post_id');
     }
 
     public function category()
