@@ -18,76 +18,118 @@ class CategoriesSeeder extends Seeder
         DB::table('categories')->truncate();
         Categories::create([
             'parent_id' => 0,
-            'name' => 'Trang Chủ',
-            'slug' => 'trang-chu',
-            'has_post' => 0,
+            'name' => 'Tin tức',
+            'slug' => 'tin-tuc',
+            'has_child' => 1,
+        ]);
+        Categories::create([
+            'parent_id' => 0,
+            'name' => 'XKLĐ Nhật Bản',
+            'slug' => 'xkld-nhat-ban',
+            'has_child' => 1,
+        ]);
+        Categories::create([
+            'parent_id' => 0,
+            'name' => 'Du học Nhật Bản',
+            'slug' => 'du-hoc',
+            'has_child' => 1,
+        ]);
+        Categories::create([
+            'parent_id' => 0,
+            'name' => 'Học nghề',
+            'slug' => 'hoc-nghe',
+            'has_child' => 1,
+        ]);
+        Categories::create([
+            'parent_id' => 0,
+            'name' => 'Hỗ trợ',
+            'slug' => 'ho-tro',
+            'has_child' => 1,
         ]);
         Categories::create([
             'parent_id' => 0,
             'name' => 'Giới thiệu',
             'slug' => 'gioi-thieu',
-            'has_post' => 1,
+            'has_child' => 0,
         ]);
         Categories::create([
             'parent_id' => 0,
-            'name' => 'Lao động nhật bản',
-            'slug' => 'lao-dong-nhat-ban',
-            'has_post' => 0,
-        ]);
-        Categories::create([
-            'parent_id' => 3,
-            'name' => 'Thực tập sinh',
-            'slug' => 'thuc-tap-sinh',
-            'has_post' => 1,
-        ]);
-        Categories::create([
-            'parent_id' => 3,
-            'name' => 'Kỹ thuật viên',
-            'slug' => 'ky-thuat-vien',
-            'has_post' => 1,
-        ]);
-        Categories::create([
-            'parent_id' => 3,
-            'name' => 'Thông tin đơn hàng',
-            'slug' => 'thong-tin-don-hang',
-            'has_post' => 1,
-        ]);
-        Categories::create([
-            'parent_id' => 0,
-            'name' => 'Hoạt động PTM',
-            'slug' => 'hoat-dong-ptm',
-            'has_post' => 0,
-        ]);
-        Categories::create([
-            'parent_id' => 7,
-            'name' => 'PTMTV',
-            'slug' => 'ptmtv',
-            'has_post' => 1,
-        ]);
-        Categories::create([
-            'parent_id' => 7,
-            'name' => 'Tin tức PTM',
-            'slug' => 'tin-tức-ptm',
-            'has_post' => 1,
-        ]);
-        Categories::create([
-            'parent_id' => 0,
-            'name' => 'Góc Nhật bản',
-            'slug' => 'goc-nhat-ban',
-            'has_post' => 1,
+            'name' => 'Chính sách',
+            'slug' => 'chinh-sach',
+            'has_child' => 0,
         ]);
         Categories::create([
             'parent_id' => 0,
             'name' => 'Liên hệ',
             'slug' => 'lien-he',
-            'has_post' => 0,
+            'has_child' => 0,
+        ]);
+        Categories::create([
+            'parent_id' => 1,
+            'name' => 'Lịch thi tuyển',
+            'slug' => 'lich-thi-tuyen',
+            'has_child' => 0,
+        ]);
+        Categories::create([
+            'parent_id' => 1,
+            'name' => 'Tổ chức thi tuyển',
+            'slug' => 'to-chuc-thi-tuyen',
+            'has_child' => 0,
+        ]);
+        Categories::create([
+            'parent_id' => 1,
+            'name' => 'Thực tập sinh, lao động',
+            'slug' => 'thuc-tap-sinh-lao-dong',
+            'has_child' => 0,
+        ]);
+        Categories::create([
+            'parent_id' => 2,
+            'name' => 'Kỹ sư',
+            'slug' => 'ky-su',
+            'has_child' => 0,
+        ]);
+        Categories::create([
+            'parent_id' => 2,
+            'name' => 'Thực tập sinh',
+            'slug' => 'thuc-tap-sinh',
+            'has_child' => 0,
+        ]);
+        Categories::create([
+            'parent_id' => 3,
+            'name' => 'Học bổng',
+            'slug' => 'hoc-bong',
+            'has_child' => 0,
         ]);
 
         Categories::create([
-            'parent_id' => 10,
-            'name' => 'Đăng ký tư vấn',
-            'slug' => 'dang-ky-tu-van',
-            'has_post' => 0,
+            'parent_id' => 3,
+            'name' => 'Không học bổng',
+            'slug' => 'khong-hoc-bong',
+            'has_child' => 0,
+        ]);
+        Categories::create([
+            'parent_id' => 4,
+            'name' => 'Pháp lý',
+            'slug' => 'phap-ly',
+            'has_child' => 0,
+        ]);
+        Categories::create([
+            'parent_id' => 4,
+            'name' => 'Vay vốn',
+            'slug' => 'vay-von',
+            'has_child' => 0,
+        ]);
+        Categories::create([
+            'parent_id' => 4,
+            'name' => 'Làm từ thiện',
+            'slug' => 'lam-tu-thien',
+            'has_child' => 0,
+        ]);
+        Categories::create([
+            'parent_id' => 4,
+            'name' => 'Thắc mắc, hỏi đáp',
+            'slug' => 'thac-mac-hoi-dap',
+            'has_child' => 0,
         ]);
     }
 }

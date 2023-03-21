@@ -56,4 +56,14 @@ class Categories extends Model implements Transformable
     {
         return $this->hasMany(Post::class, 'category_id');
     }
+
+    public function scopeIsChild()
+    {
+        return $this->where('parent_id', '!=', 0);
+    }
+
+    public function scopeHasChild()
+    {
+        return $this->where('has_child', 1);
+    }
 }
